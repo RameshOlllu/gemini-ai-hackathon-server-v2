@@ -1,0 +1,825 @@
+{
+    "food_products": [
+      {
+        "id": 1,
+        "name": "Almond Milk",
+        "category": "Beverages",
+        "type": "Plant-based Milk",
+        "ingredients": ["Almonds", "Water", "Calcium Carbonate", "Vitamin D"],
+        "brand": "Brand A",
+        "size": "64 oz",
+        "price": 3.99,
+        "is_vegan": true,
+        "calories": 30,
+        "sugar": 1,
+        "image": "https://www.loveandlemons.com/wp-content/uploads/2020/04/almond-milk.jpg",
+        "nutrition": {
+          "fat": 2.5,
+          "carbohydrates": 1,
+          "protein": 1,
+          "fiber": 0.5
+        }
+      },
+      {
+        "id": 2,
+        "name": "Organic Peanut Butter",
+        "category": "Snacks",
+        "type": "Spread",
+        "ingredients": ["Peanuts", "Salt"],
+        "brand": "Brand B",
+        "size": "16 oz",
+        "price": 6.49,
+        "is_vegan": true,
+        "calories": 190,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/06/Peanut_Butter_Jar.jpg",
+        "nutrition": {
+          "fat": 16,
+          "carbohydrates": 6,
+          "protein": 8,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 3,
+        "name": "Whole Wheat Bread",
+        "category": "Bakery",
+        "type": "Bread",
+        "ingredients": ["Whole Wheat Flour", "Water", "Yeast", "Salt"],
+        "brand": "Brand C",
+        "size": "24 oz",
+        "price": 3.49,
+        "is_vegan": true,
+        "calories": 80,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/03/Whole_wheat_bread.JPG",
+        "nutrition": {
+          "fat": 1,
+          "carbohydrates": 14,
+          "protein": 4,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 4,
+        "name": "Granola Bar",
+        "category": "Snacks",
+        "type": "Energy Bar",
+        "ingredients": ["Oats", "Honey", "Almonds", "Cinnamon"],
+        "brand": "Brand D",
+        "size": "1.5 oz",
+        "price": 1.29,
+        "is_vegan": false,
+        "calories": 150,
+        "sugar": 8,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Granola_Bars.jpg",
+        "nutrition": {
+          "fat": 6,
+          "carbohydrates": 22,
+          "protein": 3,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 5,
+        "name": "Coconut Yogurt",
+        "category": "Dairy Alternatives",
+        "type": "Yogurt",
+        "ingredients": ["Coconut Milk", "Probiotic Cultures", "Cane Sugar"],
+        "brand": "Brand E",
+        "size": "5.3 oz",
+        "price": 2.99,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 5,
+        "image": "https://www.coconutbliss.com/wp-content/uploads/2021/05/Vanilla-Coconut-Yogurt-1.jpg",
+        "nutrition": {
+          "fat": 6,
+          "carbohydrates": 14,
+          "protein": 1,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 6,
+        "name": "Olive Oil",
+        "category": "Condiments",
+        "type": "Cooking Oil",
+        "ingredients": ["100% Olive Oil"],
+        "brand": "Brand F",
+        "size": "16.9 oz",
+        "price": 8.99,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Olive_oil.jpg",
+        "nutrition": {
+          "fat": 14,
+          "carbohydrates": 0,
+          "protein": 0,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 7,
+        "name": "Chickpeas",
+        "category": "Canned Goods",
+        "type": "Legumes",
+        "ingredients": ["Chickpeas", "Water", "Salt"],
+        "brand": "Brand G",
+        "size": "15 oz",
+        "price": 1.49,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Canned_Chickpeas.jpg",
+        "nutrition": {
+          "fat": 2,
+          "carbohydrates": 20,
+          "protein": 6,
+          "fiber": 5
+        }
+      },
+      {
+        "id": 8,
+        "name": "Dark Chocolate",
+        "category": "Snacks",
+        "type": "Candy",
+        "ingredients": ["Cocoa Mass", "Sugar", "Cocoa Butter", "Vanilla"],
+        "brand": "Brand H",
+        "size": "3.5 oz",
+        "price": 2.99,
+        "is_vegan": true,
+        "calories": 170,
+        "sugar": 10,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Dark_chocolate.jpg",
+        "nutrition": {
+          "fat": 12,
+          "carbohydrates": 13,
+          "protein": 2,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 9,
+        "name": "Quinoa",
+        "category": "Grains",
+        "type": "Whole Grain",
+        "ingredients": ["Organic Quinoa"],
+        "brand": "Brand I",
+        "size": "12 oz",
+        "price": 4.99,
+        "is_vegan": true,
+        "calories": 220,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Quinoa.jpg",
+        "nutrition": {
+          "fat": 4,
+          "carbohydrates": 39,
+          "protein": 8,
+          "fiber": 5
+        }
+      },
+      {
+        "id": 10,
+        "name": "Almonds",
+        "category": "Nuts",
+        "type": "Snack",
+        "ingredients": ["Almonds"],
+        "brand": "Brand J",
+        "size": "16 oz",
+        "price": 9.99,
+        "is_vegan": true,
+        "calories": 160,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Almonds.jpg",
+        "nutrition": {
+          "fat": 14,
+          "carbohydrates": 6,
+          "protein": 6,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 11,
+        "name": "Brown Rice",
+        "category": "Grains",
+        "type": "Whole Grain",
+        "ingredients": ["Brown Rice"],
+        "brand": "Brand K",
+        "size": "32 oz",
+        "price": 3.99,
+        "is_vegan": true,
+        "calories": 215,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brown_rice.jpg",
+        "nutrition": {
+          "fat": 1.5,
+          "carbohydrates": 45,
+          "protein": 5,
+          "fiber": 4
+        }
+      },
+      {
+        "id": 12,
+        "name": "Frozen Spinach",
+        "category": "Frozen Foods",
+        "type": "Vegetable",
+        "ingredients": ["Spinach"],
+        "brand": "Brand L",
+        "size": "16 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 35,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Frozen_spinach.jpg",
+        "nutrition": {
+          "fat": 0.5,
+          "carbohydrates": 7,
+          "protein": 4,
+          "fiber": 4
+        }
+      },
+      {
+        "id": 13,
+        "name": "Maple Syrup",
+        "category": "Condiments",
+        "type": "Sweetener",
+        "ingredients": ["Maple Syrup"],
+        "brand": "Brand M",
+        "size": "12 oz",
+        "price": 7.99,
+        "is_vegan": true,
+        "calories": 52,
+        "sugar": 13,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/82/Maple_syrup.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 13,
+          "protein": 0,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 14,
+        "name": "Tomato Sauce",
+        "category": "Canned Goods",
+        "type": "Sauce",
+        "ingredients": ["Tomatoes", "Salt", "Basil"],
+        "brand": "Brand N",
+        "size": "15 oz",
+        "price": 1.99,
+        "is_vegan": true,
+        "calories": 70,
+        "sugar": 6,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Tomato_Sauce.jpg",
+        "nutrition": {
+          "fat": 0.5,
+          "carbohydrates": 15,
+          "protein": 2,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 15,
+        "name": "Rice Cakes",
+        "category": "Snacks",
+        "type": "Crisp",
+        "ingredients": ["Brown Rice"],
+        "brand": "Brand O",
+        "size": "5.5 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 35,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Rice_cakes.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 7,
+          "protein": 1,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 16,
+        "name": "Tofu",
+        "category": "Dairy Alternatives",
+        "type": "Soy Product",
+        "ingredients": ["Soybeans", "Water", "Coagulant"],
+        "brand": "Brand P",
+        "size": "14 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 70,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Tofu.jpg",
+        "nutrition": {
+          "fat": 4,
+          "carbohydrates": 2,
+          "protein": 8,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 17,
+        "name": "Chia Seeds",
+        "category": "Seeds",
+        "type": "Snack",
+        "ingredients": ["Chia Seeds"],
+        "brand": "Brand Q",
+        "size": "12 oz",
+        "price": 5.99,
+        "is_vegan": true,
+        "calories": 138,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Chia_seeds.jpg",
+        "nutrition": {
+          "fat": 9,
+          "carbohydrates": 12,
+          "protein": 5,
+          "fiber": 10
+        }
+      },
+      {
+        "id": 18,
+        "name": "Coconut Oil",
+        "category": "Condiments",
+        "type": "Cooking Oil",
+        "ingredients": ["Coconut Oil"],
+        "brand": "Brand R",
+        "size": "14 oz",
+        "price": 8.99,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Coconut_oil.jpg",
+        "nutrition": {
+          "fat": 14,
+          "carbohydrates": 0,
+          "protein": 0,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 19,
+        "name": "Pumpkin Seeds",
+        "category": "Seeds",
+        "type": "Snack",
+        "ingredients": ["Pumpkin Seeds"],
+        "brand": "Brand S",
+        "size": "8 oz",
+        "price": 4.99,
+        "is_vegan": true,
+        "calories": 180,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Pumpkin_seeds.jpg",
+        "nutrition": {
+          "fat": 14,
+          "carbohydrates": 4,
+          "protein": 9,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 20,
+        "name": "Greek Yogurt",
+        "category": "Dairy",
+        "type": "Yogurt",
+        "ingredients": ["Milk", "Live Cultures"],
+        "brand": "Brand T",
+        "size": "5.3 oz",
+        "price": 1.99,
+        "is_vegan": false,
+        "calories": 100,
+        "sugar": 7,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Greek_yogurt.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 5,
+          "protein": 10,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 21,
+        "name": "Lentils",
+        "category": "Dried Goods",
+        "type": "Legumes",
+        "ingredients": ["Lentils"],
+        "brand": "Brand U",
+        "size": "16 oz",
+        "price": 1.89,
+        "is_vegan": true,
+        "calories": 230,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Lentils.jpg",
+        "nutrition": {
+          "fat": 0.5,
+          "carbohydrates": 40,
+          "protein": 18,
+          "fiber": 16
+        }
+      },
+      {
+        "id": 22,
+        "name": "Cauliflower Rice",
+        "category": "Frozen Foods",
+        "type": "Vegetable",
+        "ingredients": ["Cauliflower"],
+        "brand": "Brand V",
+        "size": "12 oz",
+        "price": 2.99,
+        "is_vegan": true,
+        "calories": 25,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Cauliflower_rice.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 5,
+          "protein": 2,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 23,
+        "name": "Salsa",
+        "category": "Condiments",
+        "type": "Dip",
+        "ingredients": ["Tomatoes", "Onions", "Peppers", "Salt"],
+        "brand": "Brand W",
+        "size": "16 oz",
+        "price": 3.49,
+        "is_vegan": true,
+        "calories": 30,
+        "sugar": 2,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Salsa.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 7,
+          "protein": 1,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 24,
+        "name": "Spaghetti",
+        "category": "Pasta",
+        "type": "Noodles",
+        "ingredients": ["Durum Wheat Semolina", "Water"],
+        "brand": "Brand X",
+        "size": "16 oz",
+        "price": 1.99,
+        "is_vegan": true,
+        "calories": 200,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Spaghetti.jpg",
+        "nutrition": {
+          "fat": 1,
+          "carbohydrates": 42,
+          "protein": 7,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 25,
+        "name": "Potato Chips",
+        "category": "Snacks",
+        "type": "Crisps",
+        "ingredients": ["Potatoes", "Salt", "Oil"],
+        "brand": "Brand Y",
+        "size": "8 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 150,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Potato_chips.jpg",
+        "nutrition": {
+          "fat": 10,
+          "carbohydrates": 15,
+          "protein": 2,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 26,
+        "name": "Hummus",
+        "category": "Dips",
+        "type": "Spread",
+        "ingredients": ["Chickpeas", "Tahini", "Lemon Juice", "Garlic"],
+        "brand": "Brand Z",
+        "size": "10 oz",
+        "price": 3.99,
+        "is_vegan": true,
+        "calories": 100,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Hummus.jpg",
+        "nutrition": {
+          "fat": 6,
+          "carbohydrates": 9,
+          "protein": 4,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 27,
+        "name": "Fruit Snacks",
+        "category": "Snacks",
+        "type": "Candy",
+        "ingredients": ["Fruit Puree", "Sugar", "Pectin"],
+        "brand": "Brand AA",
+        "size": "5 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 80,
+        "sugar": 9,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Fruit_snacks.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 20,
+          "protein": 0,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 28,
+        "name": "Kale Chips",
+        "category": "Snacks",
+        "type": "Crisp",
+        "ingredients": ["Kale", "Olive Oil", "Salt"],
+        "brand": "Brand AB",
+        "size": "2 oz",
+        "price": 3.99,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 1,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/88/Kale_chips.jpg",
+        "nutrition": {
+          "fat": 8,
+          "carbohydrates": 7,
+          "protein": 4,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 29,
+        "name": "Zucchini Noodles",
+        "category": "Frozen Foods",
+        "type": "Pasta",
+        "ingredients": ["Zucchini"],
+        "brand": "Brand AC",
+        "size": "10 oz",
+        "price": 2.99,
+        "is_vegan": true,
+        "calories": 20,
+        "sugar": 2,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Zucchini_noodles.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 4,
+          "protein": 1,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 30,
+        "name": "Oatmeal",
+        "category": "Breakfast",
+        "type": "Cereal",
+        "ingredients": ["Oats", "Salt"],
+        "brand": "Brand AD",
+        "size": "18 oz",
+        "price": 3.49,
+        "is_vegan": true,
+        "calories": 150,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Oatmeal.jpg",
+        "nutrition": {
+          "fat": 3,
+          "carbohydrates": 27,
+          "protein": 5,
+          "fiber": 4
+        }
+      },
+      {
+        "id": 31,
+        "name": "Seaweed Snacks",
+        "category": "Snacks",
+        "type": "Crisp",
+        "ingredients": ["Seaweed", "Salt"],
+        "brand": "Brand AE",
+        "size": "1 oz",
+        "price": 1.99,
+        "is_vegan": true,
+        "calories": 30,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/Seaweed_snacks.jpg",
+        "nutrition": {
+          "fat": 2,
+          "carbohydrates": 2,
+          "protein": 1,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 32,
+        "name": "Muesli",
+        "category": "Breakfast",
+        "type": "Cereal",
+        "ingredients": ["Oats", "Nuts", "Dried Fruit"],
+        "brand": "Brand AF",
+        "size": "12 oz",
+        "price": 4.99,
+        "is_vegan": true,
+        "calories": 200,
+        "sugar": 6,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Muesli.jpg",
+        "nutrition": {
+          "fat": 7,
+          "carbohydrates": 36,
+          "protein": 7,
+          "fiber": 5
+        }
+      },
+      {
+        "id": 33,
+        "name": "Nut Butter",
+        "category": "Snacks",
+        "type": "Spread",
+        "ingredients": ["Almonds", "Cashews", "Coconut Oil"],
+        "brand": "Brand AG",
+        "size": "12 oz",
+        "price": 7.99,
+        "is_vegan": true,
+        "calories": 200,
+        "sugar": 2,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Nut_butter.jpg",
+        "nutrition": {
+          "fat": 18,
+          "carbohydrates": 6,
+          "protein": 6,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 34,
+        "name": "Rice Noodles",
+        "category": "Pasta",
+        "type": "Noodles",
+        "ingredients": ["Rice Flour", "Water"],
+        "brand": "Brand AH",
+        "size": "12 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 190,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Rice_noodles.jpg",
+        "nutrition": {
+          "fat": 1,
+          "carbohydrates": 42,
+          "protein": 4,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 35,
+        "name": "Frozen Mixed Vegetables",
+        "category": "Frozen Foods",
+        "type": "Vegetable",
+        "ingredients": ["Carrots", "Peas", "Corn", "Green Beans"],
+        "brand": "Brand AI",
+        "size": "16 oz",
+        "price": 2.99,
+        "is_vegan": true,
+        "calories": 80,
+        "sugar": 3,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Frozen_mixed_vegetables.jpg",
+        "nutrition": {
+          "fat": 0.5,
+          "carbohydrates": 16,
+          "protein": 3,
+          "fiber": 4
+        }
+      },
+      {
+        "id": 36,
+        "name": "Pesto Sauce",
+        "category": "Condiments",
+        "type": "Sauce",
+        "ingredients": ["Basil", "Olive Oil", "Garlic", "Pine Nuts"],
+        "brand": "Brand AJ",
+        "size": "6 oz",
+        "price": 4.99,
+        "is_vegan": true,
+        "calories": 80,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Pesto_sauce.jpg",
+        "nutrition": {
+          "fat": 8,
+          "carbohydrates": 3,
+          "protein": 2,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 37,
+        "name": "Balsamic Vinegar",
+        "category": "Condiments",
+        "type": "Vinegar",
+        "ingredients": ["Balsamic Vinegar"],
+        "brand": "Brand AK",
+        "size": "16.9 oz",
+        "price": 3.49,
+        "is_vegan": true,
+        "calories": 14,
+        "sugar": 2,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Balsamic_vinegar.jpg",
+        "nutrition": {
+          "fat": 0,
+          "carbohydrates": 3,
+          "protein": 0,
+          "fiber": 0
+        }
+      },
+      {
+        "id": 38,
+        "name": "Couscous",
+        "category": "Grains",
+        "type": "Pasta",
+        "ingredients": ["Couscous"],
+        "brand": "Brand AL",
+        "size": "12 oz",
+        "price": 2.49,
+        "is_vegan": true,
+        "calories": 200,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Couscous.jpg",
+        "nutrition": {
+          "fat": 0.5,
+          "carbohydrates": 41,
+          "protein": 7,
+          "fiber": 2
+        }
+      },
+      {
+        "id": 39,
+        "name": "Granola Bars",
+        "category": "Snacks",
+        "type": "Energy Bar",
+        "ingredients": ["Oats", "Honey", "Nuts"],
+        "brand": "Brand AM",
+        "size": "6 oz",
+        "price": 3.99,
+        "is_vegan": false,
+        "calories": 120,
+        "sugar": 10,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Granola_bars.jpg",
+        "nutrition": {
+          "fat": 5,
+          "carbohydrates": 17,
+          "protein": 2,
+          "fiber": 1
+        }
+      },
+      {
+        "id": 40,
+        "name": "Nut Mix",
+        "category": "Snacks",
+        "type": "Trail Mix",
+        "ingredients": ["Mixed Nuts"],
+        "brand": "Brand AN",
+        "size": "10 oz",
+        "price": 6.99,
+        "is_vegan": true,
+        "calories": 200,
+        "sugar": 2,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Nut_mix.jpg",
+        "nutrition": {
+          "fat": 18,
+          "carbohydrates": 8,
+          "protein": 6,
+          "fiber": 3
+        }
+      },
+      {
+        "id": 41,
+        "name": "Avocado Oil",
+        "category": "Condiments",
+        "type": "Cooking Oil",
+        "ingredients": ["Avocado Oil"],
+        "brand": "Brand AO",
+        "size": "12 oz",
+        "price": 9.99,
+        "is_vegan": true,
+        "calories": 120,
+        "sugar": 0,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Avocado_oil.jpg",
+        "nutrition": {
+          "fat": 14,
+          "carbohydrates": 0,
+          "protein": 0,
+          "fiber": 0
+        }
+      }
+    ]
+  }
+  

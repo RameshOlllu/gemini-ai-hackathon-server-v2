@@ -1,0 +1,71 @@
+const express = require("express");
+const multer = require("multer");
+const { ImageAnnotatorClient } = require("@google-cloud/vision");
+const { SecretManagerServiceClient } = require('@google-cloud/secret-manager'); // Import Secret Manager client
+require("dotenv").config();
+
+const app = express();
+const port = process.env.PORT || 8080;
+
+// Initialize the Secret Manager client
+const secretClient = new SecretManagerServiceClient();
+
+// Function to access the secret
+async function accessSecretVersion(secretName) {
+  const [version] = await secretClient.accessSecretVersion({ name: secretName });
+  const payload = version.payload.data.toString('utf8');
+  return JSON.parse(payload);
+}
+
+// Initialize the Vision API client using credentials from Secret Manager
+async function initializeVisionClient() {
+  try {
+    const secretName = 'projects/837715105352/secrets/vision-api-credentials/versions/latest';
+    const credentials = await accessSecretVersion(secretName);
+
+    return new ImageAnnotatorClient({
+      credentials: credentials
+    });
+  } catch (error) {
+    console.error("Error initializing Vision API client:", error);
+    throw error; // Rethrow to stop execution if initialization fails
+  }
+}
+
+
+// Set up multer for image uploading to the /tmp directory
+const upload = multer({ dest: "/tmp/" });
+
+// Endpoint for image analysis
+app.post("/analyze", upload.single("image"), async (req, res) => {
+  try {
+    const imagePath = req.file.path;
+
+    // Initialize Vision client with credentials from Secret Manager
+    const client = await initializeVisionClient();
+
+    // Call the Google Vision API to analyze the image
+    const [result] = await client.labelDetection(imagePath);
+    const labels = result.labelAnnotations;
+
+    // Extract information from labels
+    const ingredients = labels.map(label => label.description);
+
+    // You can now map these ingredients to possible side effects, nutrients, etc.
+    const response = {
+      ingredients,
+      sideEffects: "Some possible side effects based on ingredients",
+      nutrients: "Nutritional analysis based on ingredients",
+    };
+
+    res.status(200).json(response);
+  } catch (error) {
+    console.error("Error analyzing the image:", error);
+    res.status(500).send("Error analyzing the image.");
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

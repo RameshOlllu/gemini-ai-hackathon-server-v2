@@ -1,0 +1,185 @@
+const express = require("express");
+const multer = require("multer");
+const { ImageAnnotatorClient } = require("@google-cloud/vision");
+const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
+const GeminiInterface = require('./gemini/ai_interface.js'); // Gemini AI Interface
+require("dotenv").config();
+
+const app = express();
+const port = process.env.PORT || 8080;
+
+const secretClient = new SecretManagerServiceClient();
+const gemini = new GeminiInterface();
+
+// Function to access the secret from Google Secret Manager
+async function accessSecretVersion(secretName) {
+  const [version] = await secretClient.accessSecretVersion({ name: secretName });
+  const payload = version.payload.data.toString('utf8');
+  return JSON.parse(payload);
+}
+
+// Initialize the Vision API client using credentials from Secret Manager
+async function initializeVisionClient() {
+  try {
+    const secretName = 'projects/837715105352/secrets/vision-api-credentials/versions/latest';
+    const credentials = await accessSecretVersion(secretName);
+    console.log("initializeVisionClient Returning credentials:", credentials);
+    return new ImageAnnotatorClient({
+      credentials: credentials
+    });
+  } catch (error) {
+    console.error("Error initializing Vision API client:", error);
+    throw error;
+  }
+}
+
+// Set up multer for image uploading to the /tmp directory
+const upload = multer({ dest: "/tmp/" });
+
+// Utility function to check if the text contains nutrients/ingredients information
+function containsNutritionalInfo(text) {
+  const keywords = ['sugar', 'protein', 'carbohydrate', 'fat', 'calories', 'ingredient'];
+  return keywords.some(keyword => text.toLowerCase().includes(keyword));
+}
+
+// Endpoint for image analysis and story generation via Gemini AI
+app.post("/analyze", upload.single("image"), express.json(), async (req, res) => {
+  try {
+    const imagePath = req.file.path;
+
+    // Initialize Vision client with credentials from Secret Manager
+    const client = await initializeVisionClient();
+
+    const personalInfo = req.body.personalInfo ? JSON.stringify(req.body.personalInfo) : '{}';
+
+    // Call the Google Vision API to extract text from the image
+    const [result] = await client.textDetection(imagePath);
+    const detectedText = result.textAnnotations[0]?.description || ''; // Extract the raw text from the image
+
+    console.log("Extracted text:", detectedText);
+    console.log("Personal Info:", personalInfo);
+
+    // Check if the detected text contains nutritional/ingredient information
+    const prompt = `
+    I have extracted the following text from a product label: "${detectedText}".
+    Personal information (in JSON format) provided by the user for personalization is as follows:
+    ${personalInfo}
+Please analyze this text by considering personal info and return a combined response in a unified JSON structure with the following sections:
+
+### Part 1: Raw Nutritional Information with Allowed Value Comparisons
+1. Extract any raw nutritional information found in the text, regardless of the format. This could be presented in tables, bullet points, or unstructured text.
+2. Compare the extracted values with standard daily recommended or allowable values (e.g., FDA, WHO, etc.).
+3. If the values exceed the recommended limits, indicate this and explain the potential side effects of overconsumption (e.g., high sodium, saturated fat).
+4. Provide reference links to sources where the allowed values are derived (e.g., FDA guidelines).
+
+### Part 2: Ingredient Analysis
+1. Extract and analyze the ingredient information, even if ingredients are hidden in scientific or chemical names.
+2. Convert scientific or uncommon ingredient names into more common equivalents, if possible.
+3. For each ingredient, provide detailed nutritional data such as calories, proteins, carbs, fats, and sugars.
+4. Identify potential side effects or health risks associated with each ingredient (e.g., allergens, high sugar content) and also consider this personal info and identify if any specific to this user
+5. Provide reference links to external sources for further reading.
+
+### Part 3: Product Metadata and Fallback Strategy
+1. Extract any additional metadata like the product title, category, and manufacturer if available in the text.
+2. If no clear nutritional or ingredient data is found in the text, attempt to infer information based on common product names, food categories, or context from the image (e.g., "energy bar", "beverage", etc.).
+3. If no valid information can be inferred, return a message stating that the image contains insufficient information for analysis.
+4. If you are not able to find or extract the product title and category from the availabe text from image then based on the image context , add some suitable title and category.
+
+### Part 4: Product Summary and Consumption Recommendation
+1. Based on the extracted and analyzed data, generate a health summary of the product by considering given personalInfo . Provide a recommendation on whether it is good for consumption, should be consumed in moderation, or avoided altogether.
+2. Include key insights about the product, such as whether it’s high in sodium, low in sugar, or rich in nutrients.
+3. If relevant, suggest any populations that should avoid this product (e.g., people with high blood pressure, allergies).
+4. Provide an overall assessment of the product’s health value based on the ingredients and nutritional content.
+
+### Expected JSON Structure:
+{
+  "productTitle": "Product Title (if found else generated suitable one)",
+  "category": "Product Category (if inferred else generated suitable one)",
+  "manufacturer": "Manufacturer (if found else N/A)",
+  "nutritionalInfo": [
+    {
+      "nutrient": "Nutrient Name",
+      "per100g": "Value per 100g or null",
+      "perServing": "Value per serving or null",
+      "%RDA": "RDA percentage or null",
+      "allowedValue": "Allowed value from reputable source",
+      "exceedsAllowed": true/false,
+      "sideEffects": ["Side effect 1", "Side effect 2"],
+      "referenceLinks": ["URL1", "URL2"],
+      "otherColumns": {
+        "anyColumnName": "any value as it appears in the image"
+      }
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "Ingredient Name",
+      "commonName": "Common Ingredient Name (if applicable)",
+      "subIngredients": ["Sub-Ingredient 1", "Sub-Ingredient 2"],
+      "nutritionalData": {
+        "calories": "X kcal",
+        "sugar": "Y g",
+        "proteins": "Z g",
+        "carbs": "A g",
+        "fats": "B g"
+      },
+      "sideEffects": ["Side effect 1", "Side effect 2"],
+      "externalSources": ["Source 1", "Source 2"]
+    }
+  ],
+  "summary": {
+    "overallAssessment": "Good for consumption / Consume in moderation / Not recommended",
+    "keyInsights": [
+      "Low in saturated fats, which makes it a healthier choice.",
+      "Contains high levels of sodium, which can lead to high blood pressure."
+    ],
+    "recommendation": "This product is safe for most consumers but should be avoided by those with high blood pressure due to its sodium content.",
+    "message": "If no valid nutritional or ingredient data is found, return a message here"
+  }
+}
+
+Please ensure that the response strictly follows this structure, even if some data is missing.
+`;
+
+    // Send the prompt to Gemini AI to generate the structured response
+    let output;
+    try {
+      output = await gemini.generateStory(prompt);
+    } catch (error) {
+      console.error('Error during Gemini AI call:', error);
+      res.status(500).send('Error analyzing the data through Gemini AI.');
+      return;
+    }
+
+    // Log raw output to check format
+    console.log("Gemini AI Output:", output);
+
+    // Check if the response contains an "invalid image" message
+    if (output.toLowerCase().includes('invalid image')) {
+      res.status(400).json({ error: 'Invalid image. No ingredients or nutritional information found.' });
+      return;
+    }
+
+    // Try to parse the response as JSON
+    let jsonResponse;
+    try {
+      jsonResponse = JSON.parse(output);  // Check if it's valid JSON
+    } catch (parseError) {
+      console.error("Gemini AI response is not valid JSON:", output);
+      res.status(200).send(output); // Send raw text if parsing fails
+      return;
+    }
+
+    // Send the parsed JSON as the API response
+    res.status(200).json(jsonResponse);
+
+  } catch (error) {
+    console.error("Error analyzing the image:", error);
+    res.status(500).send("Error analyzing the image.");
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
